@@ -1,6 +1,12 @@
-// src/__mocks__/teamsMock.js
+// src/mocks/teamsMock.ts
+type UUID = string;
 
-export const teamsMock = [
+export interface TeamBrief {
+  id: UUID;
+  name: string;
+}
+
+export const teamsMock: TeamBrief[] = [
   { id: '7676a4bf-adfe-415c-941b-1739af07039b', name: 'Ordinary Coral Lynx' },
   { id: '5071b4fc-43f2-47a2-8403-e934dc270606', name: 'Weekly Peach Wildebeest' },
   { id: '7cf0d32d-036f-40b6-86ea-2473d4ccaecd', name: 'Surrounding Gold Pheasant' },

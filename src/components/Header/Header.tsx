@@ -8,7 +8,7 @@ interface Props {
   showBackButton?: boolean;
 }
 
-const Header = ({ title, showBackButton = true }: Props) => {
+export const Header = ({ title, showBackButton = true }: Props) => {
   const navigate = useNavigate();
   return (
     <HeaderContainer>
@@ -27,5 +27,3 @@ const Header = ({ title, showBackButton = true }: Props) => {
     </HeaderContainer>
   );
 };
-
-export default Header;

@@ -1,3 +1,4 @@
+// src/types/index.ts
 export interface Teams {
   id: string;
   name: string;

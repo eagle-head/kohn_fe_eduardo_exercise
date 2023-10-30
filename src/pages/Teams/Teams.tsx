@@ -1,11 +1,8 @@
 // src/pages/Teams.tsx
 import * as React from 'react';
-import { ListItem, Teams as TeamsList } from 'types';
-import { Spinner } from 'components/Spinner';
-import { getTeams as fetchTeams } from '../api';
-import Header from '../components/Header';
-import List from '../components/List';
-import { Container } from '../components/GlobalComponents';
+import { ListItem, Teams as TeamsList } from 'interfaces';
+import { Container, Header, List, Spinner } from 'components';
+import { getTeams as fetchTeams } from '../../api';
 
 const MapT = (teams: TeamsList[]) => {
   return teams.map(team => {
@@ -24,7 +21,7 @@ const MapT = (teams: TeamsList[]) => {
   });
 };
 
-const Teams = () => {
+export const Teams = () => {
   const [teams, setTeams] = React.useState<any>([]);
   const [isLoading, setIsLoading] = React.useState<any>(true);
 
@@ -44,5 +41,3 @@ const Teams = () => {
     </Container>
   );
 };
-
-export default Teams;

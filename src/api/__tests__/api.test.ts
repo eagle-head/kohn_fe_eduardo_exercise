@@ -1,6 +1,4 @@
-import { teamsMock } from 'mocks/teamsMock';
-import { teamMock } from 'mocks/teamMock';
-import { userMock } from 'mocks/userMock';
+import { teamMock, teamsMock, userMock } from 'api/mocks';
 import * as API from '..';
 
 // Mock global fetch

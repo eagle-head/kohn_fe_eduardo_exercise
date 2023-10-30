@@ -3,12 +3,12 @@ import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const spinnerAnimation = keyframes`
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 `;
 
 const SpinnerBody = styled.div`

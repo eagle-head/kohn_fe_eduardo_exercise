@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Header from '..';
+import { Header } from '../Header';
 
 const mockUseNavigate = jest.fn();
 

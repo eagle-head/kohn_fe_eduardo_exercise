@@ -1,8 +1,8 @@
 // src/components/List/index.tsx
 import * as React from 'react';
-import { ListItem } from 'types';
-import Card from '../Card';
-import { Spinner } from '../Spinner';
+import { ListItem } from 'interfaces';
+import { Card } from '../Card/Card';
+import { Spinner } from '../Spinner/Spinner';
 import { Container } from './styles';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const List = ({ items, hasNavigation = true, isLoading }: Props) => {
+export const List = ({ items, hasNavigation = true, isLoading }: Props) => {
   return (
     <Container>
       {isLoading && <Spinner />}
@@ -31,5 +31,3 @@ const List = ({ items, hasNavigation = true, isLoading }: Props) => {
     </Container>
   );
 };
-
-export default List;

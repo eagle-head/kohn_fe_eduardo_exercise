@@ -1,7 +1,7 @@
 // src/components/Card/index.tsx
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Teams, UserData } from 'types';
+import { Teams, UserData } from 'interfaces';
 import { Container } from './styles';
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
   navigationProps?: UserData | Teams;
 }
 
-const Card = ({ id, columns, url, hasNavigation = true, navigationProps = null }: Props): JSX.Element => {
+export const Card = ({ id, columns, url, hasNavigation = true, navigationProps = null }: Props): JSX.Element => {
   const navigate = useNavigate();
 
   return (
@@ -39,5 +39,3 @@ const Card = ({ id, columns, url, hasNavigation = true, navigationProps = null }
     </Container>
   );
 };
-
-export default Card;
