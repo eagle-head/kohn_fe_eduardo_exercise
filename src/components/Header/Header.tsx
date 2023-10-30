@@ -3,19 +3,20 @@ import * as React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { HeaderContainer, NavigationHeader, BackButton, Title } from './styles';
+import { HeaderContainer, NavigationHeader, BackButton } from './styles';
 
-interface Props {
+type HeaderProps = {
   title: string;
   showBackButton?: boolean;
-}
+};
 
-export const Header = ({ title, showBackButton = true }: Props) => {
+export function Header({ title, showBackButton = true }: HeaderProps) {
   const navigate = useNavigate();
+
   return (
     <HeaderContainer>
       <NavigationHeader>
-        {showBackButton && (
+        {showBackButton ? (
           <BackButton
             onClick={() => {
               navigate(-1);
@@ -23,9 +24,9 @@ export const Header = ({ title, showBackButton = true }: Props) => {
           >
             🔙
           </BackButton>
-        )}
-        <Title>{title}</Title>
+        ) : null}
+        <h1>{title}</h1>
       </NavigationHeader>
     </HeaderContainer>
   );
-};
+}
