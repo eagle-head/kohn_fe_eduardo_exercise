@@ -5,8 +5,8 @@ import Card from '../components/Card';
 import {Container} from '../components/GlobalComponents';
 import Header from '../components/Header';
 
-var mapU = (user: UserData) => {
-  var columns = [
+const mapU = (user: UserData) => {
+  const columns = [
     {
       key: 'Name',
       value: `${user.firstName} ${user.lastName}`,
