@@ -1,26 +1,10 @@
+// src/App.tsx
 import * as React from 'react';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Routes } from 'routes/Routes';
 
-import { TeamOverview, Teams, UserOverview } from 'pages';
-
-const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Teams />,
-    },
-    {
-      path: '/team/:teamId',
-      element: <TeamOverview />,
-    },
-    {
-      path: '/user/:useId',
-      element: <UserOverview />,
-    },
-  ]);
-
-  return <RouterProvider router={router} />;
-};
+function App() {
+  return <Routes />;
+}
 
 export default App;
