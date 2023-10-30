@@ -13,18 +13,14 @@ type HeaderProps = {
 export function Header({ title, showBackButton = true }: HeaderProps) {
   const navigate = useNavigate();
 
+  const goBackHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <HeaderContainer>
       <NavigationHeader>
-        {showBackButton ? (
-          <BackButton
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            🔙
-          </BackButton>
-        ) : null}
+        {showBackButton ? <BackButton onClick={goBackHandler}>🔙</BackButton> : null}
         <h1>{title}</h1>
       </NavigationHeader>
     </HeaderContainer>
