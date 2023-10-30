@@ -1,6 +1,8 @@
-import { Card, Container, Header } from 'components';
 import * as React from 'react';
+
 import { useLocation } from 'react-router-dom';
+
+import { Card, Container, Header } from 'components';
 import { UserData } from 'interfaces';
 
 const mapU = (user: UserData) => {

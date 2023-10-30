@@ -1,7 +1,10 @@
 // src/components/Card/index.tsx
 import * as React from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import { Teams, UserData } from 'interfaces';
+
 import { Container } from './styles';
 
 interface Props {

@@ -1,7 +1,9 @@
 // src/pages/Teams.tsx
 import * as React from 'react';
-import { ListItem, Teams as TeamsList } from 'interfaces';
+
 import { Container, Header, List, Spinner } from 'components';
+import { ListItem, Teams as TeamsList } from 'interfaces';
+
 import { getTeams as fetchTeams } from '../../api';
 
 const MapT = (teams: TeamsList[]) => {

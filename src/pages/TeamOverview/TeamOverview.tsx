@@ -1,8 +1,11 @@
 // src/pages/TeamOverview.tsx
 import * as React from 'react';
+
 import { useLocation, useParams } from 'react-router-dom';
-import { ListItem, UserData } from 'interfaces';
+
 import { Card, Container, Header, List } from 'components';
+import { ListItem, UserData } from 'interfaces';
+
 import { getTeamOverview, getUserData } from '../../api';
 
 const mapArray = (users: UserData[]) => {

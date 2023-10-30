@@ -1,8 +1,11 @@
 // src/components/List/index.tsx
 import * as React from 'react';
+
 import { ListItem } from 'interfaces';
+
 import { Card } from '../Card/Card';
 import { Spinner } from '../Spinner/Spinner';
+
 import { Container } from './styles';
 
 interface Props {

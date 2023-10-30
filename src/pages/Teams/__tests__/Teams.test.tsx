@@ -1,6 +1,8 @@
 // src/pages/__tests__/Teams.test.tsx
 import * as React from 'react';
+
 import { render, screen, waitFor } from '@testing-library/react';
+
 import * as API from '../../../api';
 import { Teams } from '../Teams';
 

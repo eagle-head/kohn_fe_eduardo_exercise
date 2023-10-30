@@ -30,7 +30,36 @@
         "@typescript-eslint/no-explicit-any": 0,
         "@typescript-eslint/no-use-before-define": ["error"],
         "@typescript-eslint/no-empty-function": 0,
-        "@typescript-eslint/no-shadow": ["error"]
+        "@typescript-eslint/no-shadow": ["error"],
+        "import/order": [
+          "error",
+          {
+            "groups": ["external", "builtin", "internal", "parent", "sibling"],
+            "pathGroups": [
+              {
+                "pattern": "react",
+                "group": "external",
+                "position": "before"
+              },
+              {
+                "pattern": "@+(routes|screens|components|hooks|theme)",
+                "group": "internal",
+                "position": "before"
+              },
+              {
+                "pattern": "./",
+                "group": "internal",
+                "position": "before"
+              }
+            ],
+            "pathGroupsExcludedImportTypes": ["react"],
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            },
+            "newlines-between": "always"
+          }
+        ]
       }
     },
     {

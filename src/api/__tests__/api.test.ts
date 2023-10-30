@@ -1,4 +1,5 @@
 import { teamMock, teamsMock, userMock } from 'api/mocks';
+
 import * as API from '..';
 
 // Mock global fetch

@@ -1,6 +1,8 @@
-import { TeamOverview, Teams, UserOverview } from 'pages';
 import * as React from 'react';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import { TeamOverview, Teams, UserOverview } from 'pages';
 
 const App = () => {
   const router = createBrowserRouter([
