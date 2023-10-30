@@ -5,21 +5,21 @@ import Teams from './pages/Teams';
 import UserOverview from './pages/UserOverview';
 
 const App = () => {
-    var router = createBrowserRouter([
-        {
-            path: '/',
-            element: <Teams />,
-        },
-        {
-            path: '/team/:teamId',
-            element: <TeamOverview />,
-        },
-        {
-            path: '/user/:useId',
-            element: <UserOverview />,
-        },
-    ]);
-    return <RouterProvider router={router} />;
+  var router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Teams />,
+    },
+    {
+      path: '/team/:teamId',
+      element: <TeamOverview />,
+    },
+    {
+      path: '/user/:useId',
+      element: <UserOverview />,
+    },
+  ]);
+  return <RouterProvider router={router} />;
 };
 
 export default App;
