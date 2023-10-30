@@ -5,40 +5,36 @@ import { useNavigate } from 'react-router-dom';
 
 import { Teams, UserData } from 'interfaces';
 
+import { ColumnList } from './components/ColumnList';
 import { Container } from './styles';
 
-interface Props {
+export type TColumn = {
+  key: string;
+  value: string;
+};
+
+type CardProps = {
   id?: string;
   url?: string;
-  columns: Array<{
-    key: string;
-    value: string;
-  }>;
+  columns: TColumn[];
   hasNavigation?: boolean;
   navigationProps?: UserData | Teams;
-}
+};
 
-export const Card = ({ id, columns, url, hasNavigation = true, navigationProps = null }: Props): JSX.Element => {
+export function Card({ id, columns, url, hasNavigation = true, navigationProps = null }: CardProps): JSX.Element {
   const navigate = useNavigate();
 
+  const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (hasNavigation) {
+      navigate(url, { state: navigationProps });
+    }
+
+    event.preventDefault();
+  };
+
   return (
-    <Container
-      data-testid={`cardContainer-${id}`}
-      hasNavigation={hasNavigation}
-      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-        if (hasNavigation) {
-          navigate(url, {
-            state: navigationProps,
-          });
-        }
-        e.preventDefault();
-      }}
-    >
-      {columns.map(({ key: columnKey, value }) => (
-        <p key={columnKey}>
-          <strong>{columnKey}</strong>&nbsp;{value}
-        </p>
-      ))}
+    <Container data-testid={`card-container-${id}`} hasNavigation={hasNavigation} onClick={onClick}>
+      <ColumnList columns={columns} />
     </Container>
   );
-};
+}

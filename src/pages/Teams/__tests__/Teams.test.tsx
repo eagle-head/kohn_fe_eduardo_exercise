@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => ({}),
 }));
 
-jest.mock('../../api');
+jest.mock('../../../api');
 
 describe('Teams', () => {
   beforeAll(() => {

@@ -25,7 +25,7 @@ describe('List', () => {
     render(<List isLoading items={items} />);
 
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
-    expect(screen.queryByTestId('cardContainer')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('card-container')).not.toBeInTheDocument();
   });
 
   it('should not render spinner and render items when it is not loading', () => {
@@ -43,7 +43,7 @@ describe('List', () => {
     render(<List isLoading={false} items={items} />);
 
     expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
-    expect(screen.getByTestId('cardContainer-1')).toBeInTheDocument();
+    expect(screen.getByTestId('card-container-1')).toBeInTheDocument();
   });
 
   it('should render multiple card when multiple items', () => {
@@ -69,7 +69,7 @@ describe('List', () => {
     ];
     render(<List isLoading={false} items={items} />);
 
-    expect(screen.getByTestId('cardContainer-1')).toBeInTheDocument();
-    expect(screen.getByTestId('cardContainer-2')).toBeInTheDocument();
+    expect(screen.getByTestId('card-container-1')).toBeInTheDocument();
+    expect(screen.getByTestId('card-container-2')).toBeInTheDocument();
   });
 });
