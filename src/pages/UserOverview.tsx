@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {useLocation} from 'react-router-dom';
-import {UserData} from 'types';
+import { useLocation } from 'react-router-dom';
+import { UserData } from 'types';
 import Card from '../components/Card';
-import {Container} from '../components/GlobalComponents';
+import { Container } from '../components/GlobalComponents';
 import Header from '../components/Header';
 
 const mapU = (user: UserData) => {

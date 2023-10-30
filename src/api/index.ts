@@ -1,5 +1,5 @@
 // src/api/index.ts
-import {Teams, TeamOverview, UserData} from 'types';
+import { Teams, TeamOverview, UserData } from 'types';
 
 const getData = async (path = '') => {
   const url = `${process.env.REACT_APP_API_BASE_URL}/${path}`;
