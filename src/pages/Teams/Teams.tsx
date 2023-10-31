@@ -2,31 +2,14 @@
 import * as React from 'react';
 
 import { Container, Header, CardList, Spinner } from 'components';
-import { ListItem, Teams as TeamsList } from 'interfaces';
+import { Teams as TeamsList } from 'interfaces';
+import { mapDataToColumns } from 'utils';
 
 import { getTeams as fetchTeams } from '../../api';
 
-const MapT = (teams: TeamsList[]) => {
-  return teams.map(team => {
-    const columns = [
-      {
-        key: 'Name',
-        value: team.name,
-      },
-    ];
-
-    return {
-      id: team.id,
-      url: `/team/${team.id}`,
-      columns,
-      navigationProps: team,
-    } as ListItem;
-  });
-};
-
 export const Teams = () => {
-  const [teams, setTeams] = React.useState<any>([]);
-  const [isLoading, setIsLoading] = React.useState<any>(true);
+  const [teams, setTeams] = React.useState<TeamsList[]>([]);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     const getTeams = async () => {
@@ -37,10 +20,12 @@ export const Teams = () => {
     getTeams();
   }, []);
 
+  const mappedTeams = teams.map(team => mapDataToColumns(team, 'team'));
+
   return (
     <Container>
       <Header title="Teams" showBackButton={false} />
-      {isLoading ? <Spinner /> : <CardList items={MapT(teams)} />}
+      {isLoading ? <Spinner /> : <CardList items={mappedTeams} />}
     </Container>
   );
 };
