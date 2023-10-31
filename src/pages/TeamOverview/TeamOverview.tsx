@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { useLocation, useParams } from 'react-router-dom';
 
-import { Card, Container, Header, List } from 'components';
+import { Card, Container, Header, CardList, Spinner } from 'components';
 import { ListItem, UserData } from 'interfaces';
 
 import { getTeamOverview, getUserData } from '../../api';
@@ -89,7 +89,7 @@ export const TeamOverview = () => {
     <Container>
       <Header title={`Team ${location.state.name}`} />
       {!isLoading && mapTLead(pageData.teamLead)}
-      <List items={mapArray(pageData?.teamMembers ?? [])} isLoading={isLoading} />
+      {isLoading ? <Spinner /> : <CardList items={mapArray(pageData?.teamMembers ?? [])} />}
     </Container>
   );
 };

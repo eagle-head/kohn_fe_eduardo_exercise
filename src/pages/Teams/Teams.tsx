@@ -1,7 +1,7 @@
 // src/pages/Teams.tsx
 import * as React from 'react';
 
-import { Container, Header, List, Spinner } from 'components';
+import { Container, Header, CardList, Spinner } from 'components';
 import { ListItem, Teams as TeamsList } from 'interfaces';
 
 import { getTeams as fetchTeams } from '../../api';
@@ -14,6 +14,7 @@ const MapT = (teams: TeamsList[]) => {
         value: team.name,
       },
     ];
+
     return {
       id: team.id,
       url: `/team/${team.id}`,
@@ -39,7 +40,7 @@ export const Teams = () => {
   return (
     <Container>
       <Header title="Teams" showBackButton={false} />
-      {isLoading ? <Spinner /> : <List items={MapT(teams)} isLoading={isLoading} />}
+      {isLoading ? <Spinner /> : <CardList items={MapT(teams)} />}
     </Container>
   );
 };
