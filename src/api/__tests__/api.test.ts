@@ -51,4 +51,16 @@ describe('ApiService', () => {
 
     expect(result).toEqual(userMock);
   });
+
+  it('should handle an error when fetching user data', async () => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    const userId = 'some-id';
+
+    mock.onGet(`/users/${userId}`).reply(500);
+
+    const result = await service.getUserData(userId, signal);
+
+    expect(result).toBeNull();
+  });
 });

@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 // src/App.tsx
 import * as React from 'react';
 

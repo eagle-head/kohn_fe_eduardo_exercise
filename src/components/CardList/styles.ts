@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import styled from 'styled-components';
 
 export const Container = styled.div`

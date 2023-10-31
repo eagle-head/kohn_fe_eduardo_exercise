@@ -19,7 +19,6 @@ export class ApiService {
       const { data } = await this.instance.get<T>(url, { signal });
       return data;
     } catch (error) {
-      console.error(error);
       return null;
     }
   }
@@ -37,4 +36,4 @@ export class ApiService {
   }
 }
 
-export const apiService = new ApiService(process.env.REACT_APP_API_BASE_URL || '');
+export const apiService = new ApiService(process.env.REACT_APP_API_BASE_URL);

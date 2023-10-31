@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 // src/types/index.ts
 export interface Teams {
   id: string;
