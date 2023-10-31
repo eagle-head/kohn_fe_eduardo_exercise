@@ -1,5 +1,5 @@
 /* istanbul ignore file */
 
-export * from './TeamOverview/TeamOverview';
-export * from './Teams/Teams';
-export * from './UserOverview/UserOverview';
+export * from './TeamOverviewPage/TeamOverviewPage';
+export * from './TeamsPage/TeamsPage';
+export * from './UserOverviewPage/UserOverviewPage';

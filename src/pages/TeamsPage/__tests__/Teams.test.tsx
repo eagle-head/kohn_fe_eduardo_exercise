@@ -2,9 +2,10 @@
 import * as React from 'react';
 
 import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { apiService } from '../../../api';
-import { Teams } from '../Teams';
+import { TeamsPage } from '../TeamsPage';
 
 jest.mock('react-router-dom', () => ({
   useLocation: () => ({
@@ -55,7 +56,7 @@ describe('Teams', () => {
         )
     );
 
-    render(<Teams />);
+    render(<TeamsPage />);
 
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
 
@@ -78,11 +79,40 @@ describe('Teams', () => {
       },
     ]);
 
-    render(<Teams />);
+    render(<TeamsPage />);
 
     await waitFor(() => {
       expect(screen.getByText('Team1')).toBeInTheDocument();
     });
     expect(screen.getByText('Team2')).toBeInTheDocument();
+  });
+
+  it('should filter teams based on search input', async () => {
+    apiService.getTeams = jest.fn().mockResolvedValue([
+      {
+        id: '1',
+        name: 'Team1',
+      },
+      {
+        id: '2',
+        name: 'Team2',
+      },
+      {
+        id: '3',
+        name: 'AlphaTeam',
+      },
+    ]);
+
+    render(<TeamsPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Team1')).toBeInTheDocument();
+    });
+
+    userEvent.type(screen.getByPlaceholderText('Search by name...'), 'Alpha');
+
+    expect(screen.getByText('AlphaTeam')).toBeInTheDocument();
+    expect(screen.queryByText('Team1')).not.toBeInTheDocument();
+    expect(screen.queryByText('Team2')).not.toBeInTheDocument();
   });
 });

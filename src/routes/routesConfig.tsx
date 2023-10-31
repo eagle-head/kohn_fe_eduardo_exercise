@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-import { TeamOverview, Teams, UserOverview } from 'pages';
+import { TeamOverviewPage, TeamsPage, UserOverviewPage } from 'pages';
 
 export const routesConfig = [
   {
     path: '/',
-    element: <Teams />,
+    element: <TeamsPage />,
   },
   {
     path: '/team/:teamId',
-    element: <TeamOverview />,
+    element: <TeamOverviewPage />,
   },
   {
     path: '/user/:useId',
-    element: <UserOverview />,
+    element: <UserOverviewPage />,
   },
 ];

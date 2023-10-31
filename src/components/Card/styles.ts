@@ -14,4 +14,5 @@ export const Container = styled.div<{ hasNavigation: boolean }>`
   max-height: 200px;
   cursor: ${props => (props.hasNavigation ? 'pointer' : 'default')};
   margin: 5px;
+  border-radius: 4px;
 `;
