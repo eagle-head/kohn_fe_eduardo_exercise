@@ -5,7 +5,7 @@ import { Container, Header, CardList, Spinner } from 'components';
 import { Teams as TeamsList } from 'interfaces';
 import { mapDataToColumns } from 'utils';
 
-import { getTeams as fetchTeams } from '../../api';
+import { apiService } from '../../api';
 
 export const Teams = () => {
   const [teams, setTeams] = React.useState<TeamsList[]>([]);
@@ -13,7 +13,7 @@ export const Teams = () => {
 
   React.useEffect(() => {
     const getTeams = async () => {
-      const response = await fetchTeams();
+      const response = await apiService.getTeams();
       setTeams(response);
       setIsLoading(false);
     };

@@ -1,45 +1,45 @@
+import axios from 'axios';
+import AxiosMockAdapter from 'axios-mock-adapter';
+
+import { ApiService } from 'api';
 import { teamMock, teamsMock, userMock } from 'api/mocks';
 
-import * as API from '..';
+describe('ApiService', () => {
+  let mock: AxiosMockAdapter;
+  let service: ApiService;
 
-// Mock global fetch
-global.fetch = jest.fn();
-const mockedFetch = global.fetch as jest.Mock;
-
-describe('API methods', () => {
   beforeEach(() => {
-    mockedFetch.mockClear();
+    mock = new AxiosMockAdapter(axios);
+    service = new ApiService('http://localhost:3000');
   });
 
-  it('fetches teams', async () => {
-    mockedFetch.mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce(teamsMock),
-    });
+  afterEach(() => {
+    mock.reset();
+  });
 
-    const result = await API.getTeams();
+  it('should fetch teams', async () => {
+    mock.onGet('/teams').reply(200, teamsMock);
+
+    const result = await service.getTeams();
+
     expect(result).toEqual(teamsMock);
-    expect(mockedFetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/teams`);
   });
 
-  it('fetches team overview by teamId', async () => {
-    mockedFetch.mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce(teamMock),
-    });
+  it('should fetch team overview by teamId', async () => {
+    const teamId = teamMock.id;
+    mock.onGet(`/teams/${teamId}`).reply(200, teamMock);
 
-    const teamId = '7676a4bf-adfe-415c-941b-1739af07039b';
-    const result = await API.getTeamOverview(teamId);
+    const result = await service.getTeamOverview(teamId);
+
     expect(result).toEqual(teamMock);
-    expect(mockedFetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/teams/${teamId}`);
   });
 
-  it('fetches user data by userId', async () => {
-    mockedFetch.mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce(userMock),
-    });
+  it('should fetch user data by userId', async () => {
+    const userId = userMock.id;
+    mock.onGet(`/users/${userId}`).reply(200, userMock);
 
-    const userId = 'fd282131-d8aa-4819-b0c8-d9e0bfb1b75c';
-    const result = await API.getUserData(userId);
+    const result = await service.getUserData(userId);
+
     expect(result).toEqual(userMock);
-    expect(mockedFetch).toHaveBeenCalledWith(`${process.env.REACT_APP_API_BASE_URL}/users/${userId}`);
   });
 });

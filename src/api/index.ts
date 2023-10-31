@@ -1,22 +1,34 @@
 // src/api/index.ts
+import axios, { AxiosInstance } from 'axios';
+
 import { Teams, TeamOverview, UserData } from 'interfaces';
 
-const getData = async (path = '') => {
-  const url = `${process.env.REACT_APP_API_BASE_URL}/${path}`;
-  const res = await fetch(url);
-  const json = await res.json();
+export class ApiService {
+  private instance: AxiosInstance;
 
-  return json;
-};
+  constructor(private readonly baseURL: string) {
+    this.instance = axios.create({
+      baseURL: this.baseURL,
+    });
+  }
 
-export const getTeams = (): Promise<Teams[]> => {
-  return getData('teams');
-};
+  public async getTeams(): Promise<Teams[]> {
+    const { data } = await this.instance.get<Teams[]>('teams');
 
-export const getTeamOverview = (teamId: string): Promise<TeamOverview> => {
-  return getData(`teams/${teamId}`);
-};
+    return data;
+  }
 
-export const getUserData = (userId: string): Promise<UserData> => {
-  return getData(`users/${userId}`);
-};
+  public async getTeamOverview(teamId: string): Promise<TeamOverview> {
+    const { data } = await this.instance.get<TeamOverview>(`teams/${teamId}`);
+
+    return data;
+  }
+
+  public async getUserData(userId: string): Promise<UserData> {
+    const { data } = await this.instance.get<UserData>(`users/${userId}`);
+
+    return data;
+  }
+}
+
+export const apiService = new ApiService(process.env.REACT_APP_API_BASE_URL || '');

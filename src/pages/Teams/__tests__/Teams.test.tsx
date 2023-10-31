@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { render, screen, waitFor } from '@testing-library/react';
 
-import * as API from '../../../api';
+import { apiService } from '../../../api';
 import { Teams } from '../Teams';
 
 jest.mock('react-router-dom', () => ({
@@ -35,7 +35,7 @@ describe('Teams', () => {
   });
 
   it('should render spinner while loading', async () => {
-    (API.getTeams as jest.Mock).mockImplementation(
+    apiService.getTeams = jest.fn(
       () =>
         new Promise(resolve =>
           setTimeout(
@@ -67,7 +67,7 @@ describe('Teams', () => {
   });
 
   it('should render teams list', async () => {
-    (API.getTeams as jest.Mock).mockResolvedValue([
+    apiService.getTeams = jest.fn().mockResolvedValue([
       {
         id: '1',
         name: 'Team1',

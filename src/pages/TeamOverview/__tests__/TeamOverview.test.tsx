@@ -1,11 +1,10 @@
-// src/pages/__tests__/testTeamOverview.tsx
+// src/pages/__tests__/TeamOverview.test.tsx
 import * as React from 'react';
 
 import { render, screen, waitFor } from '@testing-library/react';
 
-import * as API from '../../api';
-
-import { TeamOverview } from './TeamOverview';
+import { apiService } from '../../../api';
+import { TeamOverview } from '../TeamOverview';
 
 jest.mock('react-router-dom', () => ({
   useLocation: () => ({
@@ -19,6 +18,8 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
+jest.mock('../../../api');
+
 describe('TeamOverview', () => {
   beforeAll(() => {
     jest.useFakeTimers();
@@ -26,7 +27,7 @@ describe('TeamOverview', () => {
 
   afterEach(() => {
     jest.clearAllTimers();
-    jest.resetAllMocks(); // Limpar todos os mocks após cada teste
+    jest.resetAllMocks();
   });
 
   afterAll(() => {
@@ -48,13 +49,13 @@ describe('TeamOverview', () => {
       avatar: '',
     };
 
-    jest.spyOn(API, 'getTeamOverview').mockResolvedValue(teamOverview);
-    jest
-      .spyOn(API, 'getUserData')
-      .mockResolvedValueOnce(userData) // para o líder da equipe
-      .mockResolvedValueOnce(userData) // para o primeiro membro da equipe
-      .mockResolvedValueOnce(userData) // para o segundo membro da equipe
-      .mockResolvedValueOnce(userData); // para o terceiro membro da equipe
+    apiService.getTeamOverview = jest.fn().mockResolvedValue(teamOverview);
+    apiService.getUserData = jest
+      .fn()
+      .mockResolvedValueOnce(userData)
+      .mockResolvedValueOnce(userData)
+      .mockResolvedValueOnce(userData)
+      .mockResolvedValueOnce(userData);
 
     render(<TeamOverview />);
 

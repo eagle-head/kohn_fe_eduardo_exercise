@@ -7,7 +7,7 @@ import { Container, Header, CardList, Spinner } from 'components';
 import { UserData } from 'interfaces';
 import { mapDataToColumns } from 'utils';
 
-import { getTeamOverview, getUserData } from '../../api';
+import { apiService } from '../../api';
 
 interface PageState {
   teamLead?: UserData;
@@ -22,12 +22,12 @@ export const TeamOverview = () => {
 
   React.useEffect(() => {
     const getTeamUsers = async () => {
-      const { teamLeadId, teamMemberIds = [] } = await getTeamOverview(teamId);
-      const teamLead = await getUserData(teamLeadId);
+      const { teamLeadId, teamMemberIds = [] } = await apiService.getTeamOverview(teamId);
+      const teamLead = await apiService.getUserData(teamLeadId);
 
       const teamMembers = [];
       for (const teamMemberId of teamMemberIds) {
-        const data = await getUserData(teamMemberId);
+        const data = await apiService.getUserData(teamMemberId);
         teamMembers.push(data);
       }
       setPageData({
