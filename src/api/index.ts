@@ -1,33 +1,39 @@
+/* eslint-disable no-console */
 // src/api/index.ts
 import axios, { AxiosInstance } from 'axios';
 
-import { Teams, TeamOverview, UserData } from 'interfaces';
+import { TeamOverview, Teams, UserData } from 'interfaces';
 
 export class ApiService {
   private instance: AxiosInstance;
 
-  constructor(private readonly baseURL: string) {
+  constructor(private readonly baseURL: string, private readonly timeout = 10000) {
     this.instance = axios.create({
       baseURL: this.baseURL,
+      timeout: this.timeout,
     });
   }
 
-  public async getTeams(): Promise<Teams[]> {
-    const { data } = await this.instance.get<Teams[]>('teams');
-
-    return data;
+  private async get<T>(url: string, signal: AbortSignal): Promise<T | null> {
+    try {
+      const { data } = await this.instance.get<T>(url, { signal });
+      return data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 
-  public async getTeamOverview(teamId: string): Promise<TeamOverview> {
-    const { data } = await this.instance.get<TeamOverview>(`teams/${teamId}`);
-
-    return data;
+  public async getTeams(signal: AbortSignal): Promise<Teams[]> {
+    return this.get<Teams[]>('teams', signal);
   }
 
-  public async getUserData(userId: string): Promise<UserData> {
-    const { data } = await this.instance.get<UserData>(`users/${userId}`);
+  public async getTeamOverview(teamId: string, signal: AbortSignal): Promise<TeamOverview> {
+    return this.get<TeamOverview>(`teams/${teamId}`, signal);
+  }
 
-    return data;
+  public async getUserData(userId: string, signal: AbortSignal): Promise<UserData> {
+    return this.get<UserData>(`users/${userId}`, signal);
   }
 }
 
