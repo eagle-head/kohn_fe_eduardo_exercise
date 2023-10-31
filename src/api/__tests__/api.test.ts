@@ -19,32 +19,35 @@ describe('ApiService', () => {
 
   it('should fetch teams', async () => {
     const controller = new AbortController();
+    const { signal } = controller;
 
     mock.onGet('/teams').reply(200, teamsMock);
 
-    const result = await service.getTeams(controller.signal);
+    const result = await service.getTeams(signal);
 
     expect(result).toEqual(teamsMock);
   });
 
   it('should fetch team overview by teamId', async () => {
     const controller = new AbortController();
+    const { signal } = controller;
     const teamId = teamMock.id;
 
     mock.onGet(`/teams/${teamId}`).reply(200, teamMock);
 
-    const result = await service.getTeamOverview(teamId, controller.signal);
+    const result = await service.getTeamOverview(teamId, signal);
 
     expect(result).toEqual(teamMock);
   });
 
   it('should fetch user data by userId', async () => {
     const controller = new AbortController();
+    const { signal } = controller;
     const userId = userMock.id;
 
     mock.onGet(`/users/${userId}`).reply(200, userMock);
 
-    const result = await service.getUserData(userId, controller.signal);
+    const result = await service.getUserData(userId, signal);
 
     expect(result).toEqual(userMock);
   });
