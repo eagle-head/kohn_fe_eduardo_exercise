@@ -1,4 +1,4 @@
-# Tempo Frontend challenge
+# Tempo Frontend challenge - Eduardo Kohn
 
 ## To Run the project you must run:
 
