@@ -129,10 +129,8 @@ describe('TeamOverview', () => {
       expect(screen.getByText('Charlie Brown')).toBeInTheDocument();
     });
 
-    // Use the SearchBar to filter out team members
     userEvent.type(screen.getByPlaceholderText('Search for team members...'), 'Bob');
 
-    // Expect only the team lead and Bob to be displayed
     expect(screen.getByText('TeamLead Smith')).toBeInTheDocument();
     expect(screen.queryByText('Alice Johnson')).not.toBeInTheDocument();
     expect(screen.getByText('Bob Doe')).toBeInTheDocument();
