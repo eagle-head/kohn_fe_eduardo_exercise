@@ -66,14 +66,10 @@ export function useTeamOverview(teamId: string) {
           return;
         }
 
-        const teamMembers: UserData[] = [];
-        for (const teamMemberId of teamMemberIds) {
-          const memberData = await apiService.getUserData(teamMemberId, signal);
-          if (signal.aborted) {
-            return;
-          }
-
-          teamMembers.push(memberData);
+        const teamMembersPromises = teamMemberIds.map(teamMemberId => apiService.getUserData(teamMemberId, signal));
+        const teamMembers = await Promise.all(teamMembersPromises);
+        if (signal.aborted) {
+          return;
         }
 
         dispatch({

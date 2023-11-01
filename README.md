@@ -114,3 +114,43 @@ The refactoring process applied to the `Card` component focused on improving cod
 #### Summary:
 
 The introduction of custom hooks to manage business logic and handle request cancellations represents a strategic move towards a more efficient, maintainable, and resilient application. By centralizing business rules and ensuring that unnecessary operations are terminated when they're no longer needed, the application's performance is optimized, and potential pitfalls are avoided. This approach not only aligns with modern React best practices but also ensures that the application remains scalable and easy to maintain in the long run.
+
+### Husky Library Integration for Pre-commit Git Hooks
+
+#### Reason:
+
+To ensure consistent quality and reliability standards across the codebase, the Husky library was integrated to facilitate pre-commit Git checks. This integration automates the process of checking and enforcing coding standards before any commits are made. As a result, the following commands were added to the pre-commit hooks:
+
+```
+npm run prettier
+npm run lint:fix
+npm run test:clear-cache
+npm test
+```
+
+By running these commands, the code is automatically formatted according to the project's standards (`npm run prettier`), linting issues are identified and fixed (`npm run lint:fix`), test caches are cleared to ensure accurate test results (`npm run test:clear-cache`), and unit tests are executed to validate the code's functionality (`npm test`). This automated process ensures that all commits adhere to the established quality benchmarks, reducing the likelihood of introducing bugs or inconsistencies.
+
+### Implementation of `useTeamOverview` Hook in `src/pages/TeamOverview/hooks`
+
+#### Reason:
+
+Within the `src/pages/TeamOverview/hooks/useTeamOverview.ts` file, the `useTeamOverview` hook was crafted to manage the retrieval and presentation of team-related data. This hook encapsulates several best practices and optimizations:
+
+1. **Parallel API Calls with `Promise.all`**: 
+   - The hook effectively uses `Promise.all` to execute multiple API calls in parallel when fetching the data for team members. This parallel approach considerably diminishes the total processing time, providing a rapid and seamless experience for the user.
+   
+2. **Use of `AbortController` for Request Cancellation**:
+   - The `AbortController` is utilized to gracefully handle scenarios where a user may navigate away from the current page before all API requests have finished. By employing this mechanism, any pending requests are automatically terminated upon the component's dismount, ensuring efficient resource usage and preventing potential issues like memory leaks or event loop congestion.
+
+3. **Adoption of the Immer Library with `use-immer`**:
+   - The hook leverages the `immer` library through `use-immer`, ensuring state updates adhere to immutability principles. This is especially crucial in React applications, where direct state mutations can lead to unpredictable behaviors. By using Immer's draft-based approach, the hook facilitates a more intuitive way to update state while preserving the inherent benefits of immutability.
+
+4. **Reducer Pattern with `useImmerReducer`**:
+   - The state management within the hook is structured around the reducer pattern, with well-defined actions (`FETCH/INIT`, `FETCH/SUCCESS`, and `FETCH/FAILURE`). This pattern, combined with the use of `useImmerReducer`, presents a clear and maintainable way to handle state transitions based on dispatched actions. The reducer function `teamOverviewReducer` manages the loading state, errors, and data for both the team lead and team members.
+
+5. **Data Mapping Utility**:
+   - The retrieved data is transformed using the `mapDataToColumns` utility function, ensuring that the data structure is consistent and suited for presentation. This abstraction enhances the clarity of the hook and offers a centralized location for potential data formatting adjustments.
+
+#### Summary:
+
+The `useTeamOverview` hook, situated in `src/pages/TeamOverview/hooks/useTeamOverview.ts`, represents a comprehensive solution for fetching, managing, and presenting team-related data. By employing best practices like parallel API requests, request cancellation, immutable state updates, and the reducer pattern, this hook ensures an efficient, resilient, and maintainable data management flow within the Team Overview page.

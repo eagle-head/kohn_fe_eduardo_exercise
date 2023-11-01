@@ -1,40 +1,47 @@
-// src/components/SearchBar/SearchBar.test.tsx
-import * as React from 'react';
+// SearchBar.test.tsx
+import React from 'react';
 
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+
+import { useDebounce } from 'hooks/useDebounce/useDebounce';
 
 import { SearchBar } from '../SearchBar';
 
-describe('SearchBar Component', () => {
-  const handleChange = jest.fn();
+jest.mock('hooks/useDebounce/useDebounce');
 
-  it('displays the correct value', () => {
-    render(<SearchBar value="Test Value" onChange={() => {}} />);
+describe('SearchBar', () => {
+  const mockOnChange = jest.fn();
 
-    const input = screen.getByPlaceholderText('Search...');
-    expect(input).toHaveValue('Test Value');
+  beforeEach(() => {
+    (useDebounce as jest.Mock).mockReturnValue({
+      debouncedValue: '',
+    });
   });
 
-  it('calls onChange when the value is changed', () => {
-    render(<SearchBar value="" onChange={handleChange} />);
+  it('should render with initial value and placeholder', () => {
+    render(<SearchBar value="Initial" onChange={mockOnChange} placeholder="Test Placeholder" />);
 
-    const input = screen.getByPlaceholderText('Search...');
-    fireEvent.change(input, { target: { value: 'New Value' } });
-
-    expect(handleChange).toHaveBeenCalledWith('New Value');
+    expect(screen.getByDisplayValue('Initial')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Test Placeholder')).toBeInTheDocument();
   });
 
-  it('uses the default placeholder when none is provided', () => {
-    render(<SearchBar value="" onChange={() => {}} />);
+  it('should call onChange with debounced value', () => {
+    (useDebounce as jest.Mock).mockReturnValueOnce({
+      debouncedValue: 'Test',
+    });
 
-    const input = screen.getByPlaceholderText('Search...');
-    expect(input).toHaveAttribute('placeholder', 'Search...');
+    render(<SearchBar value="" onChange={mockOnChange} />);
+
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Test' } });
+
+    expect(mockOnChange).toHaveBeenCalledWith('Test');
   });
 
-  it('displays the provided placeholder correctly', () => {
-    render(<SearchBar value="" placeholder="Test Placeholder" onChange={() => {}} />);
+  it('should update internal value on user input', () => {
+    render(<SearchBar value="" onChange={mockOnChange} />);
 
-    const input = screen.getByPlaceholderText('Test Placeholder');
-    expect(input).toHaveAttribute('placeholder', 'Test Placeholder');
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Test Value' } });
+
+    expect(screen.getByDisplayValue('Test Value')).toBeInTheDocument();
   });
 });

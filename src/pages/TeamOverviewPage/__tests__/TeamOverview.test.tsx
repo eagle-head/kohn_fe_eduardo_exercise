@@ -119,21 +119,35 @@ describe('TeamOverview', () => {
     await waitFor(() => {
       expect(screen.getByText('TeamLead Smith')).toBeInTheDocument();
     });
+
     await waitFor(() => {
       expect(screen.getByText('Alice Johnson')).toBeInTheDocument();
     });
+
     await waitFor(() => {
       expect(screen.getByText('Bob Doe')).toBeInTheDocument();
     });
+
     await waitFor(() => {
       expect(screen.getByText('Charlie Brown')).toBeInTheDocument();
     });
 
     userEvent.type(screen.getByPlaceholderText('Search for team members...'), 'Bob');
 
-    expect(screen.getByText('TeamLead Smith')).toBeInTheDocument();
-    expect(screen.queryByText('Alice Johnson')).not.toBeInTheDocument();
-    expect(screen.getByText('Bob Doe')).toBeInTheDocument();
-    expect(screen.queryByText('Charlie Brown')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('TeamLead Smith')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('Alice Johnson')).not.toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Bob Doe')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('Charlie Brown')).not.toBeInTheDocument();
+    });
   });
 });

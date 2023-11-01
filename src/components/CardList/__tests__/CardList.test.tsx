@@ -1,7 +1,7 @@
 // src/components/CardList/__tests__/CardList.test.tsx
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen } from 'tests/test-utils';
 
 import { CardList } from '../CardList';
 

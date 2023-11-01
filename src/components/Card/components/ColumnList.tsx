@@ -1,3 +1,4 @@
+// src/components/Card/components/ColumnList.tsx
 import * as React from 'react';
 
 import { TColumn } from '../Card';

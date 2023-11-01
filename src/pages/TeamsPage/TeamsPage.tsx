@@ -7,7 +7,6 @@ import { useTeams } from './hooks/useTeams';
 
 export const TeamsPage = () => {
   const { teams, loading, error } = useTeams();
-
   const [searchTerm, setSearchTerm] = React.useState('');
 
   const filteredTeams = teams.filter(team =>

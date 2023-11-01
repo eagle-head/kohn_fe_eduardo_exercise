@@ -27,8 +27,8 @@ describe('Teams', () => {
   });
 
   afterEach(() => {
-    jest.clearAllTimers();
     jest.resetAllMocks();
+    jest.clearAllTimers();
   });
 
   afterAll(() => {
@@ -111,8 +111,16 @@ describe('Teams', () => {
 
     userEvent.type(screen.getByPlaceholderText('Search by name...'), 'Alpha');
 
-    expect(screen.getByText('AlphaTeam')).toBeInTheDocument();
-    expect(screen.queryByText('Team1')).not.toBeInTheDocument();
-    expect(screen.queryByText('Team2')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('AlphaTeam')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('Team1')).not.toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText('Team2')).not.toBeInTheDocument();
+    });
   });
 });

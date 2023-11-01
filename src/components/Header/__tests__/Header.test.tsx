@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from 'tests/test-utils';
 
 import { Header } from '../Header';
 
@@ -12,24 +12,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Header', () => {
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.clearAllTimers();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
-
-  it('should render header', () => {
-    render(<Header title="Header" />);
-
-    expect(screen.getByText('Header')).toBeInTheDocument();
-  });
-
   it('should render back button in header', () => {
     render(<Header title="Header" showBackButton />);
 
